@@ -1,0 +1,152 @@
+<script src="/js/jquery-3.3.1.min"></script>
+<script>
+
+</script>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="panel panel-info">
+            <div class="panel-heading clearfix">Encomendas a seguir
+                <div class="btn-group pull-right">
+                    <a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#addTrack">Adicionar
+                    </a>
+                </div>
+            </div>
+            <ul class="list-group track-entries" id="track-entries">
+                <li class="list-group-item" id="emptyList">
+                    Nenhuma..
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-8" id="content">
+        <div class="row" id="info">
+            <div class="col-md-12">
+			
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addTrack" tabindex="-1" role="dialog" aria-labelledby="addTrack">
+    <div class="modal-dialog" role="document">
+        <form id="controlForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Seguir nova encomenda</h4>
+                </div>
+                <div class="modal-body">
+                    <div id='id-input' class="form-group">
+                        <label for="shipping_id">Tracking ID:</label>
+                        <input type="text" class="form-control" required id="shipping_id"
+                               placeholder="Insere o ID de tracking da encomenda.." maxlength="50" >
+                        <span class="help-block" id="help_block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="postal_code">Descrição</label>
+                        <input type="text" class="form-control" id="description" required
+                               placeholder="Para fácil identificação, ex: Telemóvel">
+                    </div>
+                    <p class="small">Obs: insere o id de tracking para verificares se é suportado.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="submit" id="send" class="btn btn-primary">Adicionar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /Modal -->
+
+<!-- Track list entry -->
+<script id="track-list-template" type="text/x-handlebars-template">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-10">
+                <h4>\{{description}}</h4>
+                <p>\{{id}}</p>
+            </div>
+            <div class="col-xs-2 remove-container">
+                <button data-id="\{{id}}" class="btn btn-default btn-sm remove">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </div>
+        </div>
+    </li>
+</script>
+<!-- /Track list entry -->
+
+<!-- Track Content Body -->
+<script id="track-content-template" type="text/x-handlebars-template">
+    <div class="row track clearfix" id="\{{id}}">
+        <div class="col-md-12">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h4 class="heading">\{{description}}</h4> <span class="right-id">\{{id}}</span>
+                </div>
+                <div class="panel-body">
+                    <img src="/img/loading.svg" class="center-img" width="30" alt="Loading" />
+
+                    <div class="c-panasia"></div>
+                    <div class="c-sky"></div>
+                    <div class="c-correoses"></div>
+                    <div class="c-correos"></div>
+                    <div class="c-correos-old"></div>
+                    <div class="c-expresso24"></div>
+                    <div class="c-adicional"></div>
+                    <div class="c-ctt"></div>
+                    <div class="c-aligeneral"></div>
+                    <div class="c-aligeneral2"></div>
+                    <div class="c-aligeneral3"></div>
+                    <div class="c-aligeneral4"></div>
+                    <div class="c-aligeneral5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- /Track Content Body -->
+
+{{> skyTemplate }}
+
+{{> correosTemplate }}
+
+{{> correosOldTemplate }}
+
+{{> adicionalTemplate }}
+
+{{> expresso24Template }}
+
+{{> cttTemplate }}
+
+{{> aliTemplate }}
+
+{{> cainiaoEmpty }}
+
+<!-- No data template -->
+<script id="failed-template" type="text/x-handlebars-template">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="label-\{{ color }} clearfix">
+                <span>\{{ provider }}:</span>
+                <a href="\{{ link }}" target="_blank">
+                    <i class="fa fa-external-link"></i>
+                </a>
+            </h2>
+
+            \{{{ error }}}
+        </div>
+    </div>
+</script>
+<!-- /No data template -->
+
+{{#append 'scripts'}}
+    <script src="js/gear.js?v=56"></script>
+{{/append}}
